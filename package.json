@@ -1,0 +1,16 @@
+{
+  "name": "heimdall",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Heimdall — A real-time global situational awareness dashboard",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}
