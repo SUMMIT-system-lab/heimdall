@@ -1,207 +1,219 @@
-# Heimdall — Global Situational Awareness Dashboard
+# HEIMDALL
 
-A lightweight, single-user, real-time dashboard for monitoring global events. Built for the browser — no backend database required.
+[简体中文](README.zh-CN.md)
 
-![Screenshot placeholder](screenshot.png)
+**My personal real-time global intelligence dashboard** — AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface.
 
-## Stack
+> **This is a personal fork of [World Monitor](https://github.com/koala73/worldmonitor) by [Elie Habib](https://x.com/eliehabib)**, cosmetically rebranded as HEIMDALL for my own use. All credit for the original design, architecture, and data-source integrations goes to the World Monitor project and its contributors. Licensed under AGPL-3.0, same as upstream — see [LICENSE](LICENSE). Original project: [worldmonitor.app](https://www.worldmonitor.app) · [github.com/koala73/worldmonitor](https://github.com/koala73/worldmonitor).
 
-- **Vite** + **TypeScript** (vanilla, no framework)
-- Deploy target: **Vercel** (static + serverless data functions)
-- Data sources: USGS Earthquake API (live), **GDELT** news API (live with sample fallback)
-- Client-side **localStorage caching** for instant load and offline resilience
+[![GitHub stars](https://img.shields.io/github/stars/koala73/worldmonitor?style=social)](https://github.com/koala73/worldmonitor/stargazers)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/re63kWKxaz)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Last commit](https://img.shields.io/github/last-commit/koala73/worldmonitor)](https://github.com/koala73/worldmonitor/commits/main)
+[![Latest release](https://img.shields.io/github/v/release/koala73/worldmonitor?style=flat)](https://github.com/koala73/worldmonitor/releases/latest)
+[![npm: worldmonitor](https://img.shields.io/npm/v/worldmonitor?logo=npm&label=npm)](https://www.npmjs.com/package/worldmonitor)
+[![smithery badge](https://smithery.ai/badge/worldmonitor/wm-mcp)](https://smithery.ai/servers/worldmonitor/wm-mcp)
+[![skills.sh](https://skills.sh/b/koala73/worldmonitor)](https://skills.sh/koala73/worldmonitor)
 
-## Getting Started
+<p align="center">
+  <a href="https://www.worldmonitor.app"><img src="https://img.shields.io/badge/Web_App-worldmonitor.app-blue?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Web App"></a>&nbsp;
+  <a href="https://tech.worldmonitor.app"><img src="https://img.shields.io/badge/Tech_Variant-tech.worldmonitor.app-0891b2?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Tech Variant"></a>&nbsp;
+  <a href="https://finance.worldmonitor.app"><img src="https://img.shields.io/badge/Finance_Variant-finance.worldmonitor.app-059669?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Finance Variant"></a>&nbsp;
+  <a href="https://commodity.worldmonitor.app"><img src="https://img.shields.io/badge/Commodity_Variant-commodity.worldmonitor.app-b45309?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Commodity Variant"></a>&nbsp;
+  <a href="https://happy.worldmonitor.app"><img src="https://img.shields.io/badge/Happy_Variant-happy.worldmonitor.app-f59e0b?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Happy Variant"></a>&nbsp;
+  <a href="https://energy.worldmonitor.app"><img src="https://img.shields.io/badge/Energy_Variant-energy.worldmonitor.app-eab308?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Energy Variant"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/worldmonitor"><img src="https://img.shields.io/npm/v/worldmonitor?style=for-the-badge&logo=npm&logoColor=white&label=npm%20i%20worldmonitor&color=CB3837" alt="npm i worldmonitor"></a>&nbsp;
+  <a href="https://www.npmjs.com/package/worldmonitor"><img src="https://img.shields.io/badge/CLI-npx%20worldmonitor-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npx worldmonitor"></a>&nbsp;
+  <a href="https://pypi.org/project/worldmonitor-sdk/"><img src="https://img.shields.io/pypi/v/worldmonitor-sdk?style=for-the-badge&logo=pypi&logoColor=white&label=pip%20install%20worldmonitor-sdk&color=3775A9" alt="pip install worldmonitor-sdk"></a>&nbsp;
+  <a href="https://rubygems.org/gems/worldmonitor"><img src="https://img.shields.io/gem/v/worldmonitor?style=for-the-badge&logo=rubygems&logoColor=white&label=gem%20install%20worldmonitor&color=E9573F" alt="gem install worldmonitor"></a>&nbsp;
+  <a href="https://pkg.go.dev/github.com/koala73/worldmonitor/sdk/go"><img src="https://img.shields.io/badge/go%20get-sdk%2Fgo-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="go get github.com/koala73/worldmonitor/sdk/go"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.worldmonitor.app/api/download?platform=windows-exe"><img src="https://img.shields.io/badge/Download-Windows_(.exe)-0078D4?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows"></a>&nbsp;
+  <a href="https://www.worldmonitor.app/api/download?platform=macos-arm64"><img src="https://img.shields.io/badge/Download-macOS_Apple_Silicon-000000?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS ARM"></a>&nbsp;
+  <a href="https://www.worldmonitor.app/api/download?platform=macos-x64"><img src="https://img.shields.io/badge/Download-macOS_Intel-555555?style=for-the-badge&logo=apple&logoColor=white" alt="Download macOS Intel"></a>&nbsp;
+  <a href="https://www.worldmonitor.app/api/download?platform=linux-appimage"><img src="https://img.shields.io/badge/Download-Linux_(.AppImage)-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Download Linux"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.worldmonitor.app/docs/documentation"><strong>Documentation</strong></a> &nbsp;·&nbsp;
+  <a href="https://github.com/koala73/worldmonitor/releases/latest"><strong>Releases</strong></a> &nbsp;·&nbsp;
+  <a href="https://www.worldmonitor.app/docs/contributing"><strong>Contributing</strong></a>
+</p>
+
+![World Monitor Dashboard](docs/images/worldmonitor-7-mar-2026.jpg)
+
+---
+
+## What It Does
+
+- **500+ curated news feeds** across 15 categories, AI-synthesized into briefs
+- **Dual map engine** — 3D globe (globe.gl) and WebGL flat map (deck.gl) with 56 map layer types
+- **Cross-stream correlation** — military, economic, disaster, and escalation signal convergence
+- **Country Instability Index (CII)** — server-authoritative CII v8 stress scoring for 31 Tier-1 countries
+- **Finance radar** — 29 stock exchanges, commodities, crypto, and 7-signal market composite
+- **Local AI** — run everything with Ollama, no API keys required
+- **6 site variants** from a single codebase (world, tech, finance, commodity, happy, energy)
+- **Native desktop app** (Tauri 2) for macOS, Windows, and Linux
+- **25 languages** with native-language feeds and RTL support
+
+For the full feature list, architecture, data sources, and algorithms, see the **[documentation](https://www.worldmonitor.app/docs/documentation)**.
+
+---
+
+## Support Status
+
+All site variants and desktop binaries are built from a single codebase and ship from the same release process. The table below clarifies maintenance status so you know which surfaces are safe to depend on.
+
+| Surface | Status | Notes |
+|---------|--------|-------|
+| `worldmonitor.app`, `tech.`, `finance.`, `commodity.`, `happy.`, `energy.` | Stable | Public deployments built from this repo, actively maintained |
+| Desktop binaries (Windows / macOS Apple Silicon / macOS Intel / Linux AppImage) | Stable | One Tauri binary that switches variants in-app; current CI release targets are `full` and `tech` |
+
+Issues filed against any of the above are triaged from the same backlog — see the [issues board](https://github.com/koala73/worldmonitor/issues) for currently-open work.
+
+---
+
+## Quick Start
 
 ```bash
-# Install dependencies
+git clone https://github.com/koala73/worldmonitor.git
+cd worldmonitor
 npm install
-
-# Start the dev server
 npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
 ```
 
-The dev server opens at `http://localhost:3000`.
+Open [localhost:3000](http://localhost:3000) (override the port with `DEV_PORT` in `.env.local`). The app runs with no environment variables.
 
-## Project Structure
+Feature-specific data sources may require credentials. See `.env.example` for the full list.
 
-```
-├── api/
-│   └── gdelt.ts            # Vercel serverless function proxy for GDELT
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── main.ts             # Entry point — wires everything together
-│   ├── types.ts            # Event schema and type definitions
-│   ├── utils.ts            # Coordinate math, formatting helpers
-│   ├── styles.css          # Global HUD-aesthetic styles
-│   ├── vite-env.d.ts       # Vite type declarations
-│   ├── components/
-│   │   ├── radar.ts        # Canvas-based radar visualization
-│   │   ├── feed.ts         # Live event feed panel
-│   │   ├── ticker.ts       # Scrolling headline ticker
-│   │   └── filters.ts      # Layer toggle chips
-│   └── sources/
-│       ├── usgs.ts         # USGS earthquake feed fetcher
-│       ├── gdelt.ts        # GDELT news feed fetcher with sample fallback
-│       └── events.ts       # EventManager — coordinates all sources + caching
-├── vercel.json             # Vercel deployment configuration
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
+For variant-specific development:
+
+```bash
+npm run dev:tech       # tech.worldmonitor.app
+npm run dev:finance    # finance.worldmonitor.app
+npm run dev:commodity  # commodity.worldmonitor.app
+npm run dev:happy      # happy.worldmonitor.app
+npm run dev:energy     # energy.worldmonitor.app
 ```
 
-## How to Add a New Data Source
+See the **[self-hosting guide](https://www.worldmonitor.app/docs/getting-started)** for deployment options (Vercel, Docker, static).
 
-Each data source is a module that exports a function returning `HeimdallEvent[]`. Here's the flow:
+---
 
-### 1. Create a fetcher module
+## Tech Stack
 
-Create `src/sources/my-source.ts`:
+| Category | Technologies |
+|----------|-------------|
+| **Frontend** | Vanilla TypeScript, Vite, globe.gl + Three.js, deck.gl + MapLibre GL |
+| **Desktop** | Tauri 2 (Rust) with Node.js sidecar |
+| **AI/ML** | Ollama / Groq / OpenRouter, Transformers.js (browser-side) |
+| **API Contracts** | Protocol Buffers (281 protos, 35 services), sebuf HTTP annotations |
+| **Deployment** | Vercel Edge Functions (60+), Railway relay, Tauri, PWA |
+| **Caching** | Redis (Upstash), 3-tier cache, CDN, service worker |
 
-```typescript
-import type { HeimdallEvent } from "../types";
+Full stack details in the **[architecture docs](https://www.worldmonitor.app/docs/architecture)**.
 
-export async function fetchMySource(): Promise<HeimdallEvent[]> {
-  const res = await fetch("https://api.example.com/events");
-  const data = await res.json();
+---
 
-  // Map external API response to HeimdallEvent[]
-  return data.map((item: any) => ({
-    id: `my-${item.id}`,
-    category: "conflicts",     // Pick from: conflicts | military | economic | hotspots | natural | outages | sanctions
-    severity: item.magnitude > 5 ? "high" : "medium",  // critical | high | medium | low | info
-    lat: item.latitude,
-    lon: item.longitude,
-    headline: item.title,
-    location: item.place_name,
-    source: "MySource",
-    timestamp: new Date(item.date).getTime(),
-    url: item.link,            // optional
-  }));
-}
-```
+## Programmatic Access
 
-### 2. Register it in the EventManager
+World Monitor is built for agents and scripts as well as browsers:
 
-Open `src/sources/events.ts` and add the fetch call inside the `refresh()` method:
+- **MCP server** — `https://worldmonitor.app/mcp` (Streamable HTTP). Public `tools/list`; `tools/call` authenticates with a `X-WorldMonitor-Key` header or OAuth.
+- **REST API** — base `https://api.worldmonitor.app`, described by the [OpenAPI spec](https://worldmonitor.app/openapi.yaml).
+- **CLI** — the official [`worldmonitor`](https://www.npmjs.com/package/worldmonitor) npm package (source in [`cli/`](cli/)):
 
-```typescript
-// 1. Import your fetcher
-import { fetchMySource } from "./my-source";
+  ```sh
+  npx worldmonitor tools          # run ad-hoc — list every MCP tool (no key needed)
+  npm install -g worldmonitor     # or install the `worldmonitor` (alias `wm`) command
+  worldmonitor risk IR --api-key wm_xxx
+  ```
 
-// 2. Inside the refresh() method, after the existing fetches:
-try {
-  const myEvents = await fetchMySource();
-  if (myEvents.length > 0) {
-    fetched.push(myEvents);
-  }
-} catch (err) {
-  console.warn("MySource fetch failed:", err);
-}
-```
+- **SDKs** — official zero-dependency client libraries mirroring the CLI: Python [`worldmonitor-sdk`](https://pypi.org/project/worldmonitor-sdk/) (source in [`sdk/python/`](sdk/python/)), Ruby [`worldmonitor`](https://rubygems.org/gems/worldmonitor) ([`sdk/ruby/`](sdk/ruby/)), Go [`github.com/koala73/worldmonitor/sdk/go`](https://pkg.go.dev/github.com/koala73/worldmonitor/sdk/go) ([`sdk/go/`](sdk/go/)). Guide: [worldmonitor.app/docs/sdks](https://www.worldmonitor.app/docs/sdks).
 
-### 3. Optionally add a new category
+Agent discovery files: [`llms.txt`](https://worldmonitor.app/llms.txt) · [agent-skills manifest](https://worldmonitor.app/.well-known/agent-skills/index.json) · [api-catalog](https://worldmonitor.app/.well-known/api-catalog). Get an API key at [worldmonitor.app/pro](https://www.worldmonitor.app/pro).
 
-If your source needs a category not in the default set:
+---
 
-1. Add the new category ID to the `Category` type in `src/types.ts`
-2. Add an entry to `CATEGORY_LABELS` in the same file
-3. Add a color in `CATEGORY_COLORS` in `src/components/filters.ts`
-4. Add a new `LayerDef` entry in the `ALL_LAYERS` array in `src/main.ts`
+## Flight Data
 
-That's it. The dashboard will automatically pick up new events on the next refresh cycle (every 3 minutes by default).
+Flight data provided graciously by [Wingbits](https://wingbits.com?utm_source=worldmonitor&utm_medium=referral&utm_campaign=worldmonitor), the most advanced ADS-B flight data solution.
 
-## Event Schema
-
-```typescript
-interface HeimdallEvent {
-  id: string;              // Unique identifier (prefix with source name)
-  category: Category;      // conflicts | military | economic | hotspots | natural | outages | sanctions
-  severity: Severity;      // critical | high | medium | low | info
-  lat: number;             // Latitude (-90 to 90)
-  lon: number;             // Longitude (-180 to 180)
-  headline: string;        // Short descriptive title
-  location: string;        // Human-readable place name
-  source: string;          // e.g. "USGS", "GDELT"
-  timestamp: number;       // Unix timestamp in milliseconds
-  url?: string;            // Optional link for more details
-}
-```
+---
 
 ## Data Sources
 
-| Source | Type | Requires API Key? | Status |
-|--------|------|-------------------|--------|
-| USGS Earthquakes | Natural disasters | No | ✅ Live |
-| GDELT News API | Geopolitical & general events | No | ✅ Live (with sample fallback) |
+WorldMonitor aggregates 65+ external providers and APIs across geopolitics, finance, energy, climate, aviation, cyber, military, infrastructure, and news intelligence — surfaced through 500+ curated feeds and tracked by a freshness monitor covering 35 source groups. See the full [data sources catalog](https://www.worldmonitor.app/docs/data-sources) for providers, feed tiers, and collection methods.
 
-### GDELT Integration Notes
+---
 
-The GDELT 2.0 Doc API is a free, no-auth news search API. The Heimdall fetcher:
+## Contributing
 
-- Queries the API with **category-specific keyword searches** (e.g., `conflict OR war` for the Conflicts layer)
-- Extracts location from article text using a **city/country lookup heuristic**
-- Assigns **severity via keyword matching** (e.g., "killed" → critical, "protest" → medium)
-- **Falls back to curated sample data** if the API is rate-limited or unreachable
-
-**Tuning the GDELT mapper:**
-- Edit `src/sources/gdelt.ts` → `inferSeverity()` to adjust the keyword → severity mapping
-- Edit `src/sources/gdelt.ts` → `CATEGORY_QUERIES` to refine search terms for each category
-- Edit `src/sources/gdelt.ts` → `extractLocation()` to add more cities to the lookup
-
-## Caching
-
-Heimdall caches the merged event list in **localStorage**:
-
-- **Fresh cache** (< 15 minutes old): shown immediately on load, background refresh happens silently
-- **Stale cache** (> 15 minutes old): shown with a yellow "Cached [time]" indicator while fresh data loads
-- **No network**: if both live fetch and cache fail, an error message is shown
-
-## Deployment
-
-### Vercel (recommended)
+Contributions welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ```bash
-npm run build
-npx vercel --prod
+npm run typecheck        # Type checking
+npm run build:full       # Production build
 ```
 
-The project comes with:
-- `vercel.json` — preconfigured for static site + serverless API routes
-- `api/gdelt.ts` — serverless proxy for the GDELT API (avoids CORS, enables edge caching)
-
-#### Environment Variables
-
-None required for the default setup. If you add sources that need keys:
-
-1. Add them in the Vercel dashboard: Project Settings → Environment Variables
-2. Access via `process.env.VARIABLE_NAME` in `api/*.ts` functions
-
-#### Manual Steps (Vercel Dashboard)
-
-1. Connect your GitHub repo to Vercel
-2. Framework preset: **Other** (Vite auto-detection may work)
-3. Build command: `npm run build`
-4. Output directory: `dist`
-5. No environment variables needed for v1
-
-### Other Hosting
-
-```bash
-npm run build
-# Deploy the dist/ folder to Netlify, Cloudflare Pages, or any static host
-```
-
-The GDELT proxy function is only needed if you want server-side fetching. Without it, the client-side fallback in `src/sources/gdelt.ts` will try the GDELT API directly from the browser.
+---
 
 ## License
 
-MIT — use it however you like.
+**AGPL-3.0-only** for the source code. Commercial use is permitted under the AGPL when you comply with its copyleft and source-availability terms.
+
+| Use Case | Allowed? |
+|----------|----------|
+| Personal / research / educational | Yes, under AGPL-3.0-only |
+| Self-hosted instance | Yes, under AGPL-3.0-only |
+| Fork and modify | Yes, share source under AGPL-3.0-only when required |
+| Commercial use / SaaS | Yes, under AGPL-3.0-only when you comply with AGPL obligations |
+| Private-source proprietary use or official branding rights | Separate commercial or trademark permission needed |
+
+See [LICENSE](LICENSE) for the full code license and [docs/license.mdx](docs/license.mdx) for a plain-language summary. Commercial licensing is available as an alternative option for teams that need non-AGPL terms.
+
+Copyright (C) 2024-2026 Elie Habib. All rights reserved.
+
+---
+
+## Author
+
+**Elie Habib** — [GitHub](https://github.com/koala73)
+
+## Contributors
+
+<a href="https://github.com/koala73/worldmonitor/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=koala73/worldmonitor" />
+</a>
+
+## Security Acknowledgments
+
+We thank the following researchers for responsibly disclosing security issues:
+
+- **Cody Richard** — Disclosed three security findings covering IPC command exposure, renderer-to-sidecar trust boundary analysis, and fetch patch credential injection architecture (2026)
+
+See our [Security Policy](./SECURITY.md) for responsible disclosure guidelines.
+
+---
+
+<p align="center">
+  <a href="https://www.worldmonitor.app">worldmonitor.app</a> &nbsp;·&nbsp;
+  <a href="https://www.worldmonitor.app/docs/documentation">docs.worldmonitor.app</a> &nbsp;·&nbsp;
+  <a href="https://finance.worldmonitor.app">finance.worldmonitor.app</a> &nbsp;·&nbsp;
+  <a href="https://commodity.worldmonitor.app">commodity.worldmonitor.app</a>
+</p>
+
+## Star History
+
+<a href="https://api.star-history.com/svg?repos=koala73/worldmonitor&type=Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=koala73/worldmonitor&type=Date&theme=dark" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=koala73/worldmonitor&type=Date" />
+ </picture>
+</a>

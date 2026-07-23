@@ -1,0 +1,15 @@
+{
+  "hash": "6010cefb",
+  "configHash": "d6e67fea",
+  "lockfileHash": "1bf8b7f3",
+  "browserHash": "0e3e48d0",
+  "optimized": {
+    "zod/v4/core": {
+      "src": "../../node_modules/zod/v4/core/index.js",
+      "file": "zod_v4_core.js",
+      "fileHash": "47870ca9",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
